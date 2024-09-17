@@ -1,6 +1,6 @@
 // Build the metadata panel
 function buildMetadata(sample) {
-  d3.csv("https://github.com/rollernathan/NFL_2024_Week_1/blob/main/resources/play_by_play_2024_cleaned.csv").then((data) => {
+  d3.csv("https://rollernathan.github.io/NFL_2024_Week_1/resources/play_by_play_2024_cleaned.csv").then((data) => {
 
     // get the metadata field
     const metadata = data.metadata;
@@ -24,7 +24,7 @@ function buildMetadata(sample) {
 
 // Function to run on page load
 function init() {
-  d3.csv("https://github.com/rollernathan/NFL_2024_Week_1/blob/main/resources/play_by_play_2024_cleaned.csv").then((data) => {
+  d3.csv("https://rollernathan.github.io/NFL_2024_Week_1/resources/play_by_play_2024_cleaned.csv").then((data) => {
     console.log(data);
     
     // Get the names field

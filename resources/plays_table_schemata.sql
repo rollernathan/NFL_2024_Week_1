@@ -1,8 +1,7 @@
 DROP TABLE IF EXISTS plays;
 
 CREATE TABLE plays (
-	id SERIAL PRIMARY KEY,
-	play_id INTEGER NOT NULL,
+	play_id INTEGER PRIMARY KEY,
 	game_id VARCHAR(20) NOT NULL,
 	posteam VARCHAR(3),
 	defteam VARCHAR(3),
