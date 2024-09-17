@@ -1,9 +1,9 @@
 // Build the metadata panel
-function buildMetadata(playId) {
+function buildMetadata(gameId) {
   d3.csv("https://rollernathan.github.io/NFL_2024_Week_1/resources/play_by_play_2024_cleaned.csv").then((data) => {
 
-  // Find the data corresponding to the selected play_id
-  const result = data.find(item => item.play_id === playId);
+      // Find all data corresponding to the selected game_id
+      const results = data.filter(item => item.game_id === gameId);
 
     // Use d3 to select the panel with id of `#play_data`
     const panel = d3.select("#play_data");
@@ -11,14 +11,14 @@ function buildMetadata(playId) {
     // Use `.html("") to clear any existing metadata
     panel.html("");
 
-    // Check if result is found
-    if (result) {
-      // Append each key-value pair as a paragraph
-      Object.entries(result).forEach(([key, value]) => {
-        panel.append("p").text(`${key.toUpperCase()}: ${value}`);
+    // Check if results are found
+    if (results.length > 0) {
+      // Append each description as a paragraph
+      results.forEach(item => {
+        panel.append("p").text(item.description);
       });
     } else {
-      panel.append("p").text("No data found for this play_id.");
+      panel.append("p").text("No data found for this game_id.");
     };
   });
 };
@@ -31,26 +31,27 @@ function init() {
     // Use d3 to select the dropdown with id of `#selDataset`
     const dropdown = d3.select("#selDataset");
 
-    // Use the list of sample names to populate the select options
-    // Hint: Inside a loop, you will need to use d3 to append a new
-    // option for each sample name.
-    data.forEach(item => {
-      dropdown.append("option").text(item.play_id).property("value", item.play_id);
+    // Get the unique game IDs
+    const gameIds = [...new Set(data.map(item => item.game_id))];
+
+    // Populate the dropdown with game IDs
+    gameIds.forEach(gameId => {
+      dropdown.append("option").text(gameId).property("value", gameId);
     });
 
     // Get the first sample from the list
-    const firstSample = data[0].play_id;
+    const firstGameID = gameIds[0];
 
     // Build metadata panel with the first sample
-    buildMetadata(firstSample);
+    buildMetadata(firstGameID);
 
   });
 }
 
 // Function for event listener
-function optionChanged(newSample) {
+function optionChanged(newGameID) {
   // Build metadata panel each time a new sample is selected
-  buildMetadata(newSample);
+  buildMetadata(newGameID);
 }
 
 // Initialize the dashboard
