@@ -9,7 +9,7 @@ function buildMetadata(sample) {
     const result = metadata.find(entry => entry.id === parseInt(sample));
 
     // Use d3 to select the panel with id of `#sample-metadata`
-    const panel = d3.select("#sample-metadata");
+    const panel = d3.select("#play_data");
 
     // Use `.html("") to clear any existing metadata
     panel.html("");
